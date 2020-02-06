@@ -39,7 +39,7 @@ RUN wget -U "scannercli" -q -O /opt/sonar-scanner-cli.zip https://binaries.sonar
     && mv node-${NODEJS_VERSION}-linux-x64 ${NODEJS_HOME} \
     && npm install -g typescript@3.6.3
 
-COPY --chown=scanner-cli:scanner-cli bin /usr/bin/
+COPY --chown=scanner-cli:scanner-cli 4/bin /usr/bin/
 
 WORKDIR /usr/src
 
