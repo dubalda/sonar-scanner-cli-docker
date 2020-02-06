@@ -21,7 +21,7 @@ RUN apt-get update \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && update-locale LANG=ru_RU.UTF-8 \
     && echo "LANGUAGE=ru_RU.UTF-8" >> /etc/default/locale \
-    && "LC_ALL=ru_RU.UTF-8" >> /etc/default/locale \
+    && echo "LC_ALL=ru_RU.UTF-8" >> /etc/default/locale \
     && localedef -c -f UTF-8 -i ru_RU ru_RU.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
 
