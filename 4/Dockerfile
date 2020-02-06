@@ -9,10 +9,20 @@ ENV SONAR_SCANNER_HOME=${SONAR_SCANNER_HOME} \
     NODEJS_HOME=${NODEJS_HOME} \
     NODEJS_VERSION=v10.16.3 \
     PATH=${SONAR_SCANNER_HOME}/bin:${NODEJS_HOME}/bin:${PATH} \
-    NODE_PATH=${NODEJS_HOME}/lib/node_modules
+    NODE_PATH=${NODEJS_HOME}/lib/node_modules \
+    LC_ALL ru_RU.UTF-8 \
+    LANG ru_RU.UTF-8 \
+    LANGUAGE ru_RU.UTF-8
+    
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates git wget unzip xz-utils pylint \
+    && apt-get install -y --no-install-recommends ca-certificates git wget unzip xz-utils pylint locales tzdata \
+    && sed -i -e 's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale LANG=ru_RU.UTF-8 \
+    && echo "LANGUAGE=ru_RU.UTF-8" >> /etc/default/locale \
+    && "LC_ALL=ru_RU.UTF-8" >> /etc/default/locale \
+    && localedef -c -f UTF-8 -i ru_RU ru_RU.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid ${GID} scanner-cli \
