@@ -10,9 +10,9 @@ ENV SONAR_SCANNER_HOME=${SONAR_SCANNER_HOME} \
     NODEJS_VERSION=v10.16.3 \
     PATH=${SONAR_SCANNER_HOME}/bin:${NODEJS_HOME}/bin:${PATH} \
     NODE_PATH=${NODEJS_HOME}/lib/node_modules \
-    LC_ALL ru_RU.UTF-8 \
-    LANG ru_RU.UTF-8 \
-    LANGUAGE ru_RU.UTF-8
+    LC_ALL=ru_RU.UTF-8 \
+    LANG=ru_RU.UTF-8 \
+    LANGUAGE=ru_RU.UTF-8
     
 
 RUN apt-get update \
