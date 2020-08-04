@@ -122,7 +122,7 @@ RUN set -ex \
     && chown -R scanner-cli:scanner-cli "${SONAR_SCANNER_HOME}" "${SRC_PATH}" \
     && chmod -R 777 "${SRC_PATH}" "${SONAR_USER_HOME}"
 
-COPY --chown=scanner-cli:scanner-cli bin /usr/bin/
+COPY --chown=scanner-cli:scanner-cli 4/bin /usr/bin/
 
 WORKDIR ${SRC_PATH}
 
