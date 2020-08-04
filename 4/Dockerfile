@@ -1,8 +1,8 @@
 FROM alpine:3.11
 ENV JAVA_VERSION="jdk-11.0.6+10" \
-    LANG='en_US.UTF-8' \
-    LANGUAGE='en_US:en' \
-    LC_ALL='en_US.UTF-8'
+    LANG='ru_RU.UTF-8' \
+    LANGUAGE='ru_RU.UTF-8' \
+    LC_ALL='ru_RU.UTF-8'
 
 #
 # glibc setup
