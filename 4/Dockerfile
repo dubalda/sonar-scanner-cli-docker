@@ -11,7 +11,11 @@ ENV JAVA_VERSION="jdk-11.0.6+10" \
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN set -eux; \
-    apk add --no-cache --virtual .build-deps curl binutils; \
+    apk add --no-cache curl wget; \
+    wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O jq; \
+    chmod +x jq; \
+    mv jq /usr/local/bin; \
+    apk add --no-cache --virtual .build-deps binutils; \
     GLIBC_VER="2.31-r0"; \
     ALPINE_GLIBC_REPO="https://github.com/sgerrand/alpine-pkg-glibc/releases/download"; \
     GCC_LIBS_URL="https://archive.archlinux.org/packages/g/gcc-libs/gcc-libs-9.1.0-2-x86_64.pkg.tar.xz"; \
@@ -52,7 +56,7 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 WORKDIR /opt/java/openjdk
 
 RUN set -eux; \
-    apk add --no-cache --virtual .fetch-deps curl; \
+    apk add --no-cache --virtual .fetch-deps; \
     ARCH="$(apk --print-arch)"; \
     case "${ARCH}" in \
        aarch64|arm64) \
@@ -104,7 +108,7 @@ WORKDIR /opt
 RUN set -ex \
     && addgroup -S -g ${GID} scanner-cli \
     && adduser -S -D -u ${UID} -G scanner-cli scanner-cli \
-    && apk add --no-cache --virtual build-dependencies wget unzip \
+    && apk add --no-cache --virtual build-dependencies unzip \
     && apk add --no-cache git python3 bash shellcheck \
     && wget -U "scannercli" -q -O /opt/sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}.zip \
     && unzip sonar-scanner-cli.zip \
