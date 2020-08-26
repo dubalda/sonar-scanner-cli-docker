@@ -126,14 +126,7 @@ RUN set -ex \
     && chown -R scanner-cli:scanner-cli "${SONAR_SCANNER_HOME}" "${SRC_PATH}" \
     && chmod -R 777 "${SRC_PATH}" "${SONAR_USER_HOME}"
 
-RUN set -ex \
-    && mkdir -p ${SONAR_SCANNER_HOME}/extensions/plugins 
-    # && wget -q -O ${SONAR_SCANNER_HOME}/extensions/plugins/sonar-jacoco-plugin-1.1.0.898.jar https://binaries.sonarsource.com/Distribution/sonar-jacoco-plugin/sonar-jacoco-plugin-1.1.0.898.jar \
-    # && ls -lh ${SONAR_SCANNER_HOME}/extensions/plugins
-    
 COPY --chown=scanner-cli:scanner-cli 4/bin /usr/bin/
-
-COPY --chown=scanner-cli:scanner-cli 4/plugins ${SONAR_SCANNER_HOME}/extensions/plugins/
 
 WORKDIR ${SRC_PATH}
 
