@@ -11,10 +11,7 @@ ENV JAVA_VERSION="jdk-11.0.6+10" \
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN set -eux; \
-    apk add --no-cache curl wget; \
-    wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O jq; \
-    chmod +x jq; \
-    mv jq /usr/local/bin; \
+    apk add --no-cache curl wget jq; \
     apk add --no-cache --virtual .build-deps binutils; \
     GLIBC_VER="2.31-r0"; \
     ALPINE_GLIBC_REPO="https://github.com/sgerrand/alpine-pkg-glibc/releases/download"; \
